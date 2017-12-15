@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<title>
+			least Common Denominator
+		</title>
+		<title>LCD and Fractions</title>
+		<meta name="author"  content="Kage"/>
+		<meta name="date updated"  content="12/12/2017"/>
+		<meta name="description"  content="Fractions"/>
+		<meta charset="utf-8">
+	</head>
+
+	<body>
+		<script>
+			function	LCD (num1, num2) {
+				for (let count	= 1; count <= num1; count++)
+					if ((num2 * count) % num1 == 0) {
+						return num2 * count
+					}
+			}
+			
+			function addFractions(numer1, numer2,  denom1, denom2) {
+				let ansDenom = LCD (denom1, denom2);
+				let factor1  = ansDenom / denom1;
+				let factor2	 = ansDenom / denom2;
+				numer1 = factor1 * numer1;
+				numer2 = numer2 * factor2;
+				
+				//add numerators
+				let ansNumer = numer1 + numer2;
+				
+				//print answer to console
+				console.log("adding ex");
+				console.log("The answer is " +ansNumer+ "/" +ansDenom);
+				console.log("end adding ex");
+				
+				simplifyFraction(ansNumer,ansDenom);
+			}
+			
+			function simplifyFraction(numer1, denom1) {
+				let factorGuess = 2;
+				while (factorGuess < numer1 && factorGuess < denom1) {
+					if (numer1 %factorGuess == 0 && denom1 %factorGuess == 0) {
+						numer1 = numer1/factorGuess;
+						denom1 = denom1 / factorGuess;
+					} else { 
+						factorGuess = factorGuess+1}
+				}
+				
+				console.log("simplify ex");
+				console.log("The answer is " +numer1 +"/" +denom1);
+				console.log("end simplify ex");
+			}
+			
+			function addMixedFractions(whole1, numer1, denom1,
+									   whole2, numer2, denom2) {
+				let newNumerator1;
+				let newNumerator2;
+				if(whole1 > 0){
+					newNumerator1 = denom1 *whole1 +numer1;
+				} else {newNumerator1 = denom1 *whole1 -numer1;}
+				
+				if(whole2 > 0){
+					newNumerator2 = denom2 *whole2 +numer2;
+				} else {newNumerator2 = denom2 *whole2 -numer2};
+				
+				numer1 = newNumerator1;
+				numer2 = newNumerator2;
+				addFractions(numer1, numer2, denom1, denom2);
+				console.log("The answer is " +whole1 +" " +numer1 +"/" +denom1);
+			}
+			
+			//testing area
+			
+			//LCD test
+			console.log("LCD TEST")
+			console.log(LCD (3, 8));
+			console.log("end LCD TEST")
+			//add fractions test
+			console.log("Adding and simplifying fractions");
+			
+			addFractions(1, 6, 3, 8); 
+			addFractions(7, 8, 3, 4);
+			addFractions(11, 4, 23, 18);
+			addFractions(3, 7, 2, 5);
+			
+			console.log("Adding Mixed Fractions:");
+			addMixedFractions(1, 1, 2, 3, 2, 4);
+			console.log("end mixed");
+		</script>
+	</body>
+
+</html>
